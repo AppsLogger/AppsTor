@@ -594,57 +594,10 @@ var X=(d,s)=>()=>(s||d((s={exports:{}}).exports,s),s.exports);import{l as I,S as
                       <img src="https://flekstore.com/client/img/device/gifts-colored.png" width="40px"/>
                     </div>
                     <div class="item-inner">
-                      <div>
-                        Purchased gifts
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            `:""}
-          `:p`
-            <div class="list media-list inset device-header-info">
-              <ul>
-                <li>
-                  <div class="item-content">
-                    <div class="item-media">
-                      <div class="device-image-loading"></div>
-                    </div>
-                    <div class="item-inner">
-                      <div class="item-title-row">
-                        <div class="item-title skeleton-text skeleton-effect-wave">----------</div>
-                      </div>
-                      <div class="item-subtitle">UDID:</div>
-                      <div class="item-footer skeleton-text skeleton-effect-wave">--------------------------</div>
-                      <div class="item-subtitle">
-                      </div>
-                    </div>
                   </div>
-                </li>
-              </ul>
-            </div>
-          `}
-        `}
-        
-        ${localStorage.device_id!==void 0?p`
-          ${i&&p`
-            ${i.stream=="0"||i.stream_active=="0"?p`
-              ${i.queue?p`
-                <${j} device="${i}" />
-              `:p`
-                <${U} device="${i}" router="${C}"/>
-              `}
-            `:p`
-              <${N} device="${i}" router="${C}"/>
-            `}
-          `}
-        `:p`
-          <${F} router="${C}"/>
-        `}
-      </div>
-      
-    </div>
+  
+   </div>
+   </div>
   </div>
 `}}L.id="9dfb0c10af";function z(d,{$:s,$f7:v,$on:n,$update:l,$f7ready:u}){var o={icon:"http://daramghaus.github.io/icontester/images/iTunesArtwork.png",name:"App Name",version:"",default_settings:1,config:{}},e=!1,i,t=!1,a=I("https://syka.flekstore.com/",{autoConnect:!1}),c;a.on("connect",b=>{console.log("SOCKET CONNECTION"),c?c.upload(document.getElementById("ipa-input")):(c=new ee(a),c.on("ready",function(){console.log("READY UPLOAD"),c.upload(document.getElementById("ipa-input"))}),c.on("start",function(h){console.log("Start uploading",h)}),c.on("stream",function(h){console.log(h);var f=(h.sent/h.size*100).toFixed(0);s("#upload-percent").html(f+"%"),v.progressbar.set("#upload-progressbar",f)}),c.on("complete",function(h){console.log("Upload Complete",h),s("#upload-percent").html("100%"),v.progressbar.set("#upload-progressbar",100),r(h)}),c.on("error",function(h){if(h=String(h),h.includes("Max Uploading File")){var f=B(c.maxFileSize,!0,2);h="Max Uploading File size must be under "+f,v.dialog.alert(h,"Error"),k()}else v.dialog.alert(h,"Error"),k()}),c.on("abort",function(h){onsole.log("Aborted: ",h),k()}))}),a.on("callback",b=>{t=b,console.log(t),l(),b.status===!0&&(i=encodeURIComponent("https://flekstore.com/install_ipa/"+o.name+"/"+e.stream+"/signer_app.plist?filename="+t.message),window.open("itms-services://?action=download-manifest&url="+i,"_self"),a.disconnect()),b.status===!1&&(k(),v.dialog.alert(t.message,"Error"))}),a.on("disconnect",function(){console.log("DISCONNECTED")});const m=()=>{o.status="upload",o.config.name=s("#signer-ipa-app-name").val(),o.config.bundle_id=s("#signer-ipa-bundle-id").val(),l(),a.connect()},k=()=>{a.disconnect(),o.status=!1,l(),s("#upload-percent").html("0%"),v.progressbar.set("#upload-progressbar",0)},r=b=>{o.status="sign",l(),o.config.name=o.config.name==o.name?!1:o.config.name,t={status:"process",message:"Connection to server"},l(),a.emit("start_sign",{device_id:e.id,stream:e.stream,file:b.name,app_name:o.config.name,bundle_id:o.config.bundle_id})},p=()=>{const b=document.getElementById("ipa-input").files;try{new AppInfoParser(b[0]).parse().then(f=>{console.log(f),o.icon=f.icon,o.name=f.package||f.CFBundleName||f.CFBundleDisplayName,o.size=b[0].size,o.version=f.versionName||f.CFBundleShortVersionString,l()}).catch(f=>{console.log(f),v.dialog.alert("Incorrect file format. Please make sure the file is in the right format and not damaged."),v.accordion.open(".accordion-item.select-file"),s("#ipa-input").val()}),o.default_settings&&v.accordion.close(".accordion-item.select-file"),v.accordion.open(".accordion-item.file-preview"),o.default_settings=0}catch(h){console.log(h),v.dialog.alert("Incorrect file format. Please make sure the file is in the right format and not damaged."),v.accordion.open(".accordion-item.select-file"),s("#ipa-input").val()}},C=()=>{s("#ipa-app-name").val(o.name),s("#ipa-bundle-id").val("")},B=(b,h=!1,f=1)=>{const g=h?1e3:1024;if(Math.abs(b)<g)return b+" B";const y=h?["kB","MB","GB","TB","PB","EB","ZB","YB"]:["KiB","MiB","GiB","TiB","PiB","EiB","ZiB","YiB"];let S=-1;const w=10**f;do b/=g,++S;while(Math.round(Math.abs(b)*w)/w>=g&&S<y.length-1);return b.toFixed(f)+" "+y[S]},D=(b=()=>{})=>{v.request.json("https://flekstore.com/rest/device/getDevice",{id:localStorage.device_id}).then(function(h){e=JSON.parse(h.data.data),l(function(){return b(e)})})},P=()=>{v.tab.show(".view-device-tab",".device-tab-link"),s(".link-device").click(),v.popup.close()};window.onblur=function(){t.status===!0&&(t=!1,o.status=!1,l())};const T=()=>{if(!localStorage.device_id){P();return}D(function(b){if(b.stream_active!=="1"){P();return}s("#ipa-input").click()})};return u(()=>{localStorage.device_id&&D()}),function(b){b.$;var h=b.$h;b.$root,b.$f7,b.$f7route,b.$f7router,b.$theme;var f=b.$update;return b.$store,h`
   <div class="page" data-name="settings">
