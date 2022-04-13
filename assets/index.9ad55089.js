@@ -180,38 +180,6 @@ var X=(d,s)=>()=>(s||d((s={exports:{}}).exports,s),s.exports);import{l as I,S as
     
     <div class="block">
       <a href="https://youtu.be/G5h5IBuIuv8" class="button button-large button-outline external" target="_blank">
-        <i class="icon f7-icons">play_rectangle_fill</i> Watch tutorial
-      </a>
-    </div>
-    
-    <div class="list accordion-list inset no-margin-bottom">
-      <ul>
-        <li class="accordion-item">
-          <a href="#" class="item-content item-link">
-            <div class="item-inner">
-              <div class="item-title">What data will we receive?</div>
-            </div>
-          </a>
-          <div class="accordion-item-content" style="" aria-hidden="true">
-            <div class="block">
-              <p>
-                When adding a device, we will receive your device UDID, device type and model number.
-                <br/><br/>
-                UDID is an abbreviation for unique device identifier. Every Apple mobile device has it.
-                <br/><br/>
-                You need to provide us with the UDID of your device so that we can sign apps for this device.
-              </p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="block text-color-gray">
-      <center>By adding a device, you agree to the processing of data about your device.</center>
-    </div>
-  </div>
-`}}F.id="b973730cc1";function U(d,{$:s,$on:v,$f7:n,$update:l,$h:u,$f7ready:o}){let e=!1,i=!1;const t=n.toast.create({text:"UDID copied",position:"top",horizontalPosition:"center",closeTimeout:1500,closeButton:!0}),a=()=>{n.dialog.prompt("Enter gift code",function(r){n.dialog.preloader("Code activation"),n.request.json("https://flekstore.com/rest/device/useGift/",{device_id:localStorage.device_id,code:r}).then(function(p){n.dialog.close(),p.data.status==="ok"?d.router.refreshPage():n.dialog.alert(p.data.message,"Error")})})},c=()=>{n.request.json("https://flekstore.com/rest/device/getTariff/",{id:localStorage.device_id}).then(function(r){e=JSON.parse(r.data.data),l()})},m=()=>{n.request.json("https://flekstore.com/rest/device/restoreForFree/",{id:localStorage.device_id}).then(function(r){n.dialog.alert(r.data.message,function(){d.router.refreshPage()})})},k=()=>{n.request.json("https://flekstore.com/rest/device/getLastPayment/",{id:localStorage.device_id}).then(function(r){i=JSON.parse(r.data.data),l()})};return o(()=>{localStorage.device_id!==void 0&&(c(),k()),new ClipboardJS(".copy-udid").on("success",function(p){t.open()})}),function(r){r.$;var p=r.$h;return r.$root,r.$f7,r.$f7route,r.$f7router,r.$theme,r.$update,r.$store,p`
-
 <div>
   ${e&&p`
     ${e.tariff!==1&&e.tariff!==3?p`
